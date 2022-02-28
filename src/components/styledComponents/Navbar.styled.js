@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 export const NavbarContainer = styled.nav`
     width: 100%;
+    position: absolute;
+    z-index: 1;
     height: ${({extendNavbar})=> extendNavbar? "100vh" : "9vh"};
     background-color: black;
     color: white;

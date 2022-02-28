@@ -7,6 +7,7 @@ import logo from '../images/logo.jpg'
 function Navbar() {
 
     const [extendNavbar, setExstendNavbar] = useState(false);
+    
 
   return (
       <>
@@ -27,9 +28,9 @@ function Navbar() {
             </NavbarInnerContainer>
             {extendNavbar &&
             <NavbarExtendedContainer>
-                <NavbarLinkExtended to='/'>Home</NavbarLinkExtended>
-                <NavbarLinkExtended to='/author'>Author</NavbarLinkExtended>
-                <NavbarLinkExtended to='/books'>Books</NavbarLinkExtended>
+                <NavbarLinkExtended to='/' onClick={()=>setExstendNavbar((currentValue)=>!currentValue)}>Home</NavbarLinkExtended>
+                <NavbarLinkExtended to='/author' onClick={()=>setExstendNavbar((currentValue)=>!currentValue)}>Author</NavbarLinkExtended>
+                <NavbarLinkExtended to='/books' onClick={()=>setExstendNavbar((currentValue)=>!currentValue)}>Books</NavbarLinkExtended>
             </NavbarExtendedContainer>}
         </NavbarContainer>
       </>
