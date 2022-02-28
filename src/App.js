@@ -10,17 +10,17 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <div>
-          <BrowserRouter>   
-            <Navbar />
-        <Container>  
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/author" element={<Author />} />
-              <Route path="/books" element={<BooksList />} />
-              <Route path="/:id/profile" element={<Profile />} />
-            </Routes>
-        </Container>
-          </BrowserRouter>
+        <BrowserRouter>   
+          <Navbar />
+          <Container>  
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/author" element={<Author />} />
+                <Route path="/books" element={<BooksList />} />
+                <Route path="/:id/profile" element={<Profile />} />
+              </Routes>
+          </Container>
+        </BrowserRouter>
     </div>
   )
 }
