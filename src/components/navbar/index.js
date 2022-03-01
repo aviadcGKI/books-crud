@@ -1,8 +1,8 @@
 import React , {useState} from 'react'
 import { NavbarContainer, LeftNavbarContainer, RightNavbarContainer
 ,NavbarInnerContainer, NavbarExtendedContainer, NavbarLinkContainer
-,NavbarLink, NavbarLinkExtended , LogoContainer, OpenLinksButton } from './styledComponents/Navbar.styled'
-import logo from '../images/logo.jpg'
+,NavbarLink, NavbarLinkExtended , LogoContainer, OpenLinksButton } from '../styledComponents/styledNavbar'
+import logo from '../../components/assets/images/logo.jpg'
 
 function Navbar() {
 

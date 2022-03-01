@@ -1,11 +1,11 @@
 import React from 'react'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import { Container } from './components/styledComponents/Container.styled';
+import Container from './components/styledComponents/styledContainer';
 import Home from './components/pages/Home';
 import Author from './components/pages/Author';
 import BooksList from './components/pages/BooksList';
 import Profile from './components/pages/Profile';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 
 function App() {
   return (
