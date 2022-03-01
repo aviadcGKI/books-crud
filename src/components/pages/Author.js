@@ -1,8 +1,34 @@
-import React from 'react'
+import React ,{useState} from 'react'
+import { db } from '../../db/index.js' 
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 function Author() {
+  const [authorName,setAuthorName] = useState('');
+
+  //get the authors collection
+  const authorsCollectionRef = collection(db, "authors");
+
+  const createAuthor = async ()=>{
+    try{
+      const data = await addDoc(authorsCollectionRef, { name: authorName });
+      console.log(data);
+    }catch(e){
+      console.log(e)
+    }
+  }
+
   return (
-    <div>Author</div>
+    <>
+    <input onChange={(e)=>setAuthorName(e.target.value)} placeholder='author name'/>
+    <button onClick={createAuthor}>create author</button>  
+    </>
   )
 }
 
