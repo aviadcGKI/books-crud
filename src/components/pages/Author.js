@@ -11,13 +11,15 @@ import {
 
 function Author() {
   const [authorName,setAuthorName] = useState('');
+  const [authorAge,setAuthorAge] = useState(null);
+  const [authorCountry,setAuthorCountry] = useState(null);
 
   //get the authors collection
   const authorsCollectionRef = collection(db, "authors");
 
-  const createAuthor = async ()=>{
+  const addAuthor = async ()=>{
     try{
-      const data = await addDoc(authorsCollectionRef, { name: authorName });
+      const data = await addDoc(authorsCollectionRef, { name: authorName,age: authorAge, country: authorCountry });
       console.log(data);
     }catch(e){
       console.log(e)
@@ -27,7 +29,9 @@ function Author() {
   return (
     <>
     <input onChange={(e)=>setAuthorName(e.target.value)} placeholder='author name'/>
-    <button onClick={createAuthor}>create author</button>  
+    <input onChange={(e)=>setAuthorAge(e.target.value)} placeholder='author age'/>
+    <input onChange={(e)=>setAuthorCountry(e.target.value)} placeholder='author country'/>
+    <button onClick={addAuthor}>add author</button>  
     </>
   )
 }
