@@ -9,7 +9,7 @@ import {
   doc,
 } from "firebase/firestore";
 import ListContainer from '../styledComponents/styledListContainer/index.js';
-import PreviewList from '../styledComponents/styledPreviewList/index.js';
+import PreviewList from '../previewList/index.js';
 
 function Author() {
   const [authorsList,setAuthorsList] = useState(null);
@@ -43,22 +43,19 @@ function Author() {
     try{
       const data = await addDoc(authorsCollectionRef, { name: authorName,age: authorAge, country: authorCountry });
       console.log(data);
+      setAuthorsList(null);
     }catch(e){
       console.log(e)
     }
   }
 
-  // const getAllAuthors = async ()=>{
-  //   try{
-  //     const data = await getDocs(authorsCollectionRef)
-  //     console.log(data.docs[0].data());
-  //   }catch(e){
-  //     console.log(e);
-  //   }
-  // }
-
   const displayAuthorList = ()=>{
-
+    return authorsList.map((author)=>{
+      return <PreviewList key={author.id}
+        title={author.name}
+        subTitle={author.country}
+      />
+    })
   }
 
   return (
@@ -66,11 +63,9 @@ function Author() {
       <input onChange={(e)=>setAuthorName(e.target.value)} placeholder='author name'/>
       <input onChange={(e)=>setAuthorAge(e.target.value)} placeholder='author age'/>
       <input onChange={(e)=>setAuthorCountry(e.target.value)} placeholder='author country'/>
-      <button onClick={addAuthor}>add author</button>  
-      <button onClick={()=>console.log(authorsList[0].id)}>get authors</button> 
-      
+      <button onClick={addAuthor}>add author</button>        
       <ListContainer>
-      
+        {authorsList && displayAuthorList()}
       </ListContainer>
        
     </>

@@ -1,12 +1,12 @@
 import React from 'react'
-import PreviewList from '../styledComponents/styledPreviewList'
+import StyledPreviewList from '../styledComponents/styledPreviewList'
 
 function PreviewList(props) {
   return (
-    <PreviewList>
+    <StyledPreviewList>
         <h2>{props.title}</h2>
         <h4>{props.subTitle}</h4>
-    </PreviewList>
+    </StyledPreviewList>
   )
 }
 

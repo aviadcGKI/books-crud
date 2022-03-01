@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 
-const PreviewList = styled.div`
-    width: 200px;
-    height: 200px;
+const StyledPreviewList = styled.div`
+    width: 100px;
+    height: 100px;
     border: 1px solid black;
+    text-align: center;
 `;
 
-export default PreviewList
+export default StyledPreviewList

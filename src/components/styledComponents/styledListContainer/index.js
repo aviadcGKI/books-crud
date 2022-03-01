@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 const ListContainer = styled.div`
     width: 80%;
-    height: 70vh;
+    min-height: 60vh;
     border: 1px solid red;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
 `
