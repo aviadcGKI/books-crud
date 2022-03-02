@@ -1,5 +1,5 @@
 import React ,{useState, useEffect} from 'react'
-import { db } from '../../db/index.js' 
+import { db } from '../../../db/index.js' 
 import {
   collection,
   getDocs,
@@ -8,8 +8,8 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import ListContainer from '../styledComponents/styledListContainer/index.js';
-import PreviewList from '../previewList/index.js';
+import ListContainer from '../../styledComponents/styledListContainer/index.js';
+import PreviewList from 'components/PreviewList/index.js';
 
 function Author() {
   const [authorsList,setAuthorsList] = useState(null);
@@ -49,9 +49,12 @@ function Author() {
     }
   }
 
+  
+
   const displayAuthorList = ()=>{
     return authorsList.map((author)=>{
-      return <PreviewList key={author.id}
+      return <PreviewList
+        key={author.id}
         title={author.name}
         subTitle={author.country}
       />

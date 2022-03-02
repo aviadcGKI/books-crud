@@ -1,6 +1,7 @@
 import React from 'react'
 import StyledPreviewList from '../styledComponents/styledPreviewList'
 
+
 function PreviewList(props) {
   return (
     <StyledPreviewList>

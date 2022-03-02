@@ -6,6 +6,11 @@ const StyledPreviewList = styled.div`
     height: 100px;
     border: 1px solid black;
     text-align: center;
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(0.98);
+    }
 `;
 
 export default StyledPreviewList
