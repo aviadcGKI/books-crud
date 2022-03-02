@@ -45,8 +45,10 @@ function Author() {
 
   const displayAuthorList = ()=>{
     return authorsList.map((author)=>{
+      const path = `/author/${author.id}`
       return <PreviewList
         key={author.id}
+        path={path}
         title={author.name}
         subTitle={author.country}
       />

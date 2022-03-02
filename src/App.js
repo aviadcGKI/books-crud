@@ -14,7 +14,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/author" element={<Author />} />
                 <Route path="/books" element={<Books />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/author/:id" element={<Profile />} />
               </Routes>
           </Container>
         </BrowserRouter>

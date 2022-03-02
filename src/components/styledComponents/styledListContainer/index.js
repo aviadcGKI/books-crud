@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const ListContainer = styled.div`
+const StyledListContainer = styled.div`
     width: 80%;
-    min-height: 60vh;
+    min-height: 50vh;
     border: 1px solid red;
     display: flex;
     justify-content: center;
@@ -10,4 +10,4 @@ const ListContainer = styled.div`
     gap: 1rem;
 `
 
-export default ListContainer
+export default StyledListContainer
