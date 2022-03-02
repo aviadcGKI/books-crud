@@ -1,13 +1,5 @@
 import React ,{useState, useEffect} from 'react'
-import { db } from '../../../db/index.js' 
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { db } from 'db' 
 import ListContainer from '../../styledComponents/styledListContainer/index.js';
 import PreviewList from 'components/PreviewList/index.js';
 
@@ -18,18 +10,18 @@ function Author() {
   const [authorCountry,setAuthorCountry] = useState(null);
 
   //get the authors collection
-  const authorsCollectionRef = collection(db, "authors");
+  const authorsCollectionRef = db.collection("authors");
 
   useEffect(()=>{
     const getAllAuthors = async ()=>{
       try{
-        const data = await getDocs(authorsCollectionRef)
+        const data = await authorsCollectionRef.get();
         setAuthorsList(
           data.docs.map((doc)=>{
           return {...doc.data(),id: doc.id}
         })
         );
-        console.log(authorsList);
+        console.log(data);
       }catch(e){
         console.log(e);
       }
@@ -41,7 +33,7 @@ function Author() {
 
   const addAuthor = async ()=>{
     try{
-      const data = await addDoc(authorsCollectionRef, { name: authorName,age: authorAge, country: authorCountry });
+      const data = await authorsCollectionRef.add({ name: authorName,age: authorAge, country: authorCountry });
       console.log(data);
       setAuthorsList(null);
     }catch(e){
