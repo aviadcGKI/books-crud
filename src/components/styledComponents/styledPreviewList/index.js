@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 
 
 const StyledPreviewList = styled(Link)`
-    width: 100px;
+    min-width: 100px;
     height: 100px;
     border: 1px solid black;
     text-align: center;
     text-decoration: none;
     color: #000;
+    /* overflow: hidden; */
 
     &:hover{
         cursor: pointer;
