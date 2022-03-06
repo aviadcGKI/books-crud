@@ -7,7 +7,7 @@ function CountrySelector(props) {
     const options = useMemo(() => countryList().getData(), []);
 
     const changeHandler = value => {
-    setValue(value)
+        setValue(value)
     }
 
     useEffect(()=>{

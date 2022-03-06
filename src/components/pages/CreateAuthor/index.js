@@ -1,16 +1,23 @@
 import React ,{useState} from 'react'
 import { Form,Button} from 'react-bootstrap';
-import {storage} from 'db'
-import CountrySelector from 'components/CountrySelector';
+import {storage,db} from 'db'
+import CountrySelector from 'components/countrySelector';
+import AgeSelector from 'components/ageSelector';
+import { StyledSpinner } from 'components/styledComponents';
 
 function CreateAuthor() {
     const [authorName, setAuthorName] = useState('');
     const [authorAge, setAuthorAge] = useState('');
     const [authorCountry, setAuthorCountry] = useState('');
     const [authorImage, setAuthorImage] = useState(null);
+    const [isLoading,setIsLoading] = useState(false);
 
     const handleImageChange = (e) =>{
        setAuthorImage(e.target.files[0]);
+    }
+
+    const handleSubmit = ()=>{
+
     }
 
     const handleImageUpload = ()=>{
@@ -48,7 +55,8 @@ function CreateAuthor() {
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Author Age</Form.Label>
-                <Form.Control type="text" placeholder="Enter email" />
+                <AgeSelector setAge={setAuthorAge} />
+                {/* <Form.Control type="text" placeholder="Enter email" /> */}
                 {/* <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
                 </Form.Text> */}
@@ -59,18 +67,17 @@ function CreateAuthor() {
                 {/* <Form.Control type="text" placeholder="Password" /> */}
                 <CountrySelector setCountry = {setAuthorCountry} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
+
             <Form.Group controlId="formFile" className="mb-3" onChange={handleImageChange}>
                 <Form.Label>Add an image</Form.Label>
                 <Form.Control type="file" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
                 Submit
             </Button>
         </Form>
-        <Button onClick={handleImageUpload}>check the image</Button>
+        {isLoading && <StyledSpinner />}
+        {/* <Button onClick={handleImageUpload}>check the image</Button> */}
     </>
   )
 }
