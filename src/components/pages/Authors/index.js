@@ -3,7 +3,7 @@ import { db } from 'db'
 import { StyledListContainer } from 'components/styledComponents';
 import PreviewList from 'components/PreviewList/index.js';
 
-function Author() {
+function Authors() {
   const [authorsList, setAuthorsList] = useState(null);
   const [authorName, setAuthorName] = useState('');
   const [authorAge, setAuthorAge] = useState(null);
@@ -76,4 +76,4 @@ function Author() {
   )
 }
 
-export default Author
+export default Authors
