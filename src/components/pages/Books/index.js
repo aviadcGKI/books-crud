@@ -1,9 +1,9 @@
 import React from 'react'
 
-function BooksList() {
+function Books() {
   return (
     <div>BooksList</div>
   )
 }
 
-export default BooksList
+export default Books
