@@ -1,13 +1,6 @@
-import React, { useState } from 'react'
-import { db } from 'db' 
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import React from 'react'
+
+
 
 
 function Home() {
@@ -16,6 +9,7 @@ function Home() {
 
   return (
     <>
+    
       <h1>welcome home</h1>
     </>
   )
