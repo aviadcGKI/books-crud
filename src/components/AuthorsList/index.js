@@ -1,10 +1,19 @@
 import React from 'react'
 import { Card, Button } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 
 function AuthorsList(props) {
 
-  const goToProfile = () => {
+  const history = useHistory();
 
+  const goToProfile = () => {
+    const state = {
+      authorName: props.authorName,
+      authorAge: props.authorAge,
+      authorCountry: props.authorCountry,
+      imageUrl: props.imageUrl
+    }
+    history.push(`/author/${props.authorId}`,state);
   }
   return (
     <>

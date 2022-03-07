@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom';
-import { StyledListContainer } from 'components/styledComponents';
+import { useLocation } from "react-router-dom";
 import { Card, Button } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 
 
 
 function Profile() {
 
+
+  const location = useLocation()
+  const history = useHistory();
+
+  useEffect(()=>{
+    console.log(location.state);
+  },[location.state]);
+
+  const goToCreateBook = ()=>{
+    const state = {
+      authorId: location.state.authorId
+    }
+    history.push('/createbook',state);
+  }
 
 
 
@@ -15,15 +29,13 @@ function Profile() {
 
   return (
     <>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+      <Card style={{ width: '20rem' }}>
+        <Card.Img variant="top" src={location.state.imageUrl} />
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Card.Title>{location.state.authorName}</Card.Title>
+          <Card.Title>{location.state.authorAge}</Card.Title>
+          <Card.Title>{location.state.authorCountry}</Card.Title>
+          <Button variant="primary" onClick={goToCreateBook}>Add Book</Button>
         </Card.Body>
       </Card>
     </>

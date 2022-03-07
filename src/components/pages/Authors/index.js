@@ -32,12 +32,12 @@ function Authors() {
 
   const displayAuthorList = () => {
     return authorsList.map((author) => {
-      const path = `/author/${author.id}`
       return <AuthorsList
-        key={author.id}
-        path={path}
+        key={Math.random()}
+        authorId={author.id}
         authorName={author.name}
-        authorCountery={author.country}
+        authorCountry={author.country}
+        authorAge={author.age}
         imageUrl={author.imageUrl}
       />
     })

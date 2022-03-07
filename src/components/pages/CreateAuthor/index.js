@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { storage, db } from 'db'
-import CountrySelector from 'components/countrySelector';
-import AgeSelector from 'components/ageSelector';
+import CountrySelector from 'components/selector/countrySelector';
+import NumberSelector from 'components/selector/numberSelector';
 import { StyledSpinner } from 'components/styledComponents';
 
 function CreateAuthor() {
@@ -76,7 +76,7 @@ function CreateAuthor() {
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Author Age</Form.Label>
-                    <AgeSelector setAge={setAuthorAge} ref={authorAgeRef} />
+                    <NumberSelector setAge={setAuthorAge} ref={authorAgeRef} size={120} />
                     {/* <Form.Control type="text" placeholder="Enter email" /> */}
                     {/* <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
@@ -98,7 +98,6 @@ function CreateAuthor() {
                 </Button>
             </Form>
             {isLoading && <StyledSpinner />}
-            {/* <Button onClick={()=>console.log(authorAgeRef)}>check the image</Button> */}
         </>
     )
 }

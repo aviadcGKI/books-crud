@@ -1,31 +1,43 @@
-import React from 'react'
-import { Form,Button} from 'react-bootstrap';
+import React ,{useState} from 'react'
+import { Form, Button } from 'react-bootstrap';
+import NumberSelector from 'components/selector/numberSelector';
+import { StyledSpinner } from 'components/styledComponents';
 
 function CreateBook() {
-  return (
-    <>
-        <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-                </Form.Text>
-            </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
-    </>
-  )
+    const [isLoading,setIsLoading] = useState();
+
+    return (
+        <>
+            <h2>Add Book</h2>
+            <Form>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control placeholder="Enter Title" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>genre</Form.Label>
+                    <Form.Control placeholder="Enter genre" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>pages</Form.Label>
+                    <NumberSelector size={2000} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>price</Form.Label>
+                    <Form.Control placeholder="Enter Price" />
+                </Form.Group>
+                <Form.Group controlId="formFile" className="mb-3" >
+                    <Form.Label>Add an image</Form.Label>
+                    <Form.Control type="file" />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+                {isLoading && <StyledSpinner />}
+            </Form>
+        </>
+    )
 }
 
 export default CreateBook
