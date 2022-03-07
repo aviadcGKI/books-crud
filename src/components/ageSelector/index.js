@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Select from 'react-select';
 
 let options = new Array(120).fill().map((option,index)=>{
@@ -6,24 +6,23 @@ let options = new Array(120).fill().map((option,index)=>{
 });
 
 
-export default function AgeSelector(props) {
-    const [value, setValue] = useState('');
+function AgeSelector(props,ref) {
 
   const changeHandler = value => {
-    setValue(value)
+    props.setAge(value.label);
+    console.log(ref.current,"ref value");
 }
-
-  useEffect(()=>{
-    props.setAge(value);
-  },[])
 
   return (
     <div className="App">
       <Select
-        defaultValue={value}
+        defaultValue={null}
         onChange={changeHandler}
         options={options}
+        ref={ref}
       />
     </div>
   );
 }
+
+export default React.forwardRef(AgeSelector);

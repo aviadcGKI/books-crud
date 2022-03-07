@@ -15,7 +15,7 @@ function Navabr() {
             <Nav.Link href="/books">Books</Nav.Link>
             <NavDropdown title="Authors" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="/createAuthor">Create Author</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Authors list</NavDropdown.Item>
+                <NavDropdown.Item href="/authors">Authors list</NavDropdown.Item>
                 {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
