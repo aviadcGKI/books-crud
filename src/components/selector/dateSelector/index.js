@@ -3,14 +3,12 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
-export default function DateSelector(){
+export default function DateSelector(props){
   const [startDate, setStartDate] = useState(new Date());
 
-    const handleDateChange = (e)=>{
-        console.log(e);
+    const handleDateChange = (date)=>{
+      setStartDate(date);
+        props.setDatePublished(date);
     }
 
   return (

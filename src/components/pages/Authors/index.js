@@ -13,13 +13,13 @@ function Authors() {
     const getAllAuthors = async () => {
       try {
         const data = await authorsCollectionRef.get();
-        const activeAuthorList = [];
+        const activeAuthorsList = [];
         data.docs.forEach((doc) => {
           if (doc.data().isActive) {
-            activeAuthorList.push({ ...doc.data(), id: doc.id })
+            activeAuthorsList.push({ ...doc.data(), id: doc.id })
           }
         });
-        setAuthorsList(activeAuthorList);
+        setAuthorsList(activeAuthorsList);
         console.log(data);
       } catch (e) {
         console.log(e);
@@ -28,7 +28,7 @@ function Authors() {
     if (!authorsList) {
       getAllAuthors();
     }
-  },[])
+  }, [])
 
   const displayAuthorList = () => {
     return authorsList.map((author) => {
