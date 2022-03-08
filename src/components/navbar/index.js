@@ -11,7 +11,7 @@ function Navabr() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-            <Nav.Link href="#features">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/books">Books</Nav.Link>
             <NavDropdown title="Authors" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="/createAuthor">Create Author</NavDropdown.Item>

@@ -1,26 +1,24 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import Container from './components/styledComponents/styledContainer';
 import Navbar from 'components/navbar';
-import { Profile, Authors, Books, Home ,CreateBook,CreateAuthor } from 'components/pages';
+import { Profile, Authors, Books, Home, CreateBook, CreateAuthor } from 'components/pages';
 
 function App() {
   return (
     <div>
-        <BrowserRouter>   
-          <Navbar />
-          <Container>  
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/authors" element={<Authors />} />
-                <Route path="/createBook" element={<CreateBook />} />
-                <Route path="/books" element={<Books />} />
-                <Route path="/author/:id" element={<Profile />} />
-                <Route path="/createAuthor" element={<CreateAuthor />} />
-              </Routes>
-          </Container>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
+        <Container>
+          <Route path="/" exact component={Home} />
+          <Route path="/authors" exact component={Authors} />
+          <Route path="/createBook" exact component={CreateBook} />
+          <Route path="/books" exact component={Books} />
+          <Route path="/author/:id" exact component={Profile} />
+          <Route path="/createAuthor" exact component={CreateAuthor} />
+        </Container>
+      </BrowserRouter>
     </div>
   )
 }

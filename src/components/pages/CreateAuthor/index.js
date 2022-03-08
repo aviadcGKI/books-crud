@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { storage, db } from 'db'
-import CountrySelector from 'components/countrySelector';
-import AgeSelector from 'components/ageSelector';
+import CountrySelector from 'components/selector/countrySelector';
+import NumberSelector from 'components/selector/numberSelector';
 import { StyledSpinner } from 'components/styledComponents';
 
 function CreateAuthor() {
@@ -13,10 +13,8 @@ function CreateAuthor() {
     const [isLoading, setIsLoading] = useState(false);
 
     //ref
-    const authorNameRef = useRef(); 
-    const authorAgeRef = useRef(); 
-    const authorCountryRef = useRef(); 
-    const authorimageRef = useRef(); 
+    const authorAgeRef = useRef();
+    const authorCountryRef = useRef();
 
     //get the authors collection
     const authorsCollectionRef = db.collection("authors");
@@ -40,7 +38,8 @@ function CreateAuthor() {
             }
             const data = await authorsCollectionRef.add(author);
             console.log(data);
-            resetInputFields();
+            resetSelectFields();
+            e.target.reset();
             setIsLoading(false);
         } catch (e) {
             setIsLoading(false);
@@ -55,50 +54,39 @@ function CreateAuthor() {
         return await fileRef.getDownloadURL();
     }
 
-    const resetInputFields = ()=>{
-        authorNameRef.current.value = "";
+    const resetSelectFields = () => {
         authorAgeRef.current.selectOption('');
         authorCountryRef.current.selectOption('');
-        authorimageRef.current.value = null;
     }
 
     return (
         <>
             <h2>Add Author</h2>
-            <Form>
+            <Form onSubmit={handleSubmit} >
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Author name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setAuthorName(e.target.value)} ref={authorNameRef} />
-                    {/* <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-                </Form.Text> */}
+                    <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setAuthorName(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Author Age</Form.Label>
-                    <AgeSelector setAge={setAuthorAge} ref={authorAgeRef} />
-                    {/* <Form.Control type="text" placeholder="Enter email" /> */}
-                    {/* <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-                </Form.Text> */}
+                    <NumberSelector setNumber={setAuthorAge} ref={authorAgeRef} size={120} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Author Country</Form.Label>
-                    {/* <Form.Control type="text" placeholder="Password" /> */}
                     <CountrySelector setCountry={setAuthorCountry} ref={authorCountryRef} />
                 </Form.Group>
 
                 <Form.Group controlId="formFile" className="mb-3" onChange={handleImageChange}>
                     <Form.Label>Add an image</Form.Label>
-                    <Form.Control type="file" ref={authorimageRef} />
+                    <Form.Control type="file" />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                <Button variant="primary" type="submit" >
                     Submit
                 </Button>
             </Form>
             {isLoading && <StyledSpinner />}
-            {/* <Button onClick={()=>console.log(authorAgeRef)}>check the image</Button> */}
         </>
     )
 }

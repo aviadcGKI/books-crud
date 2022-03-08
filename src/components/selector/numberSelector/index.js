@@ -1,16 +1,17 @@
 import React from 'react';
 import Select from 'react-select';
 
-let options = new Array(120).fill().map((option,index)=>{
-    return {value: index+1 , label: index+1}
-});
 
 
-function AgeSelector(props,ref) {
+function NumberSelector(props,ref) {
+
+  let options = new Array(props.size).fill().map((option,index)=>{
+      return {value: index+1 , label: index+1} 
+  });
 
   const changeHandler = value => {
-    props.setAge(value.label);
-    console.log(ref.current,"ref value");
+    props.setNumber(value.label);
+    // console.log(ref.current,"ref value");
 }
 
   return (
@@ -25,4 +26,4 @@ function AgeSelector(props,ref) {
   );
 }
 
-export default React.forwardRef(AgeSelector);
+export default React.forwardRef(NumberSelector);
