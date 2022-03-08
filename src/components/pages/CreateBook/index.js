@@ -3,6 +3,7 @@ import { Form, Button, Row, Col, FloatingLabel } from 'react-bootstrap';
 import { DateSelector } from 'components/selector';
 import { StyledSpinner } from 'components/styledComponents';
 import { storage, db } from 'db'
+import firebase from "firebase/app";
 import { useLocation } from "react-router-dom";
 
 function CreateBook() {
@@ -29,8 +30,9 @@ function CreateBook() {
         e.preventDefault();
         try {
             setIsLoading(true);
-            // const bookImageUrl = await handleImageUpload(bookImage);
-            // console.log(bookImageUrl);
+            const authorId = location.state.authorId;
+            const bookImageUrl = await handleImageUpload(bookImage);
+            console.log(bookImageUrl);
             console.log(location,"author id");
             const book = {
                 title: bookTitle,
@@ -39,12 +41,14 @@ function CreateBook() {
                 price: bookPrice,
                 description: bookDescription,
                 datePublished: bookDatePublished,
-                // imageUrl: bookImageUrl,
-                // author: location.state.authorId,
+                imageUrl: bookImageUrl,
+                author: authorId,
                 isActive: true
             }
-            const data = await booksCollectionRef.add(book);
-            console.log(data,"book created");
+            const newBookData = await booksCollectionRef.add(book);
+            authorsCollectionRef.doc(authorId).update({
+                books: firebase.firestore.FieldValue.arrayUnion(newBookData.id)
+            });
             e.target.reset();
             setIsLoading(false);
         } catch (e) {

@@ -21,8 +21,8 @@ function Profile() {
 
   return (
     <>
-      <Card style={{ width: '20rem' }}>
-        <Card.Img variant="top" src={location.state.imageUrl} />
+      <Card style={{ width: '20rem' , height: '25rem' }}>
+        <Card.Img variant="top" src={location.state.imageUrl} height="400" />
         <Card.Body>
           <Card.Title>{location.state.authorName}</Card.Title>
           <Card.Title>{location.state.authorAge}</Card.Title>

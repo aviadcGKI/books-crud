@@ -7,6 +7,7 @@ export default function DateSelector(props){
   const [startDate, setStartDate] = useState(new Date());
 
     const handleDateChange = (date)=>{
+      setStartDate(date);
         props.setDatePublished(date);
     }
 
