@@ -5,11 +5,19 @@ import { Button } from 'react-bootstrap';
 
 function BooksNavbar(props) {
 
+    const handleChange = (value)=>{
+        props.setSelectedAuthor(value.value);
+    }
+
+    const handleClick = ()=>{
+        props.setSelectedAuthor(null);
+    }
+
     return (
         <>
             <StyledBooksNavbar>
-                <Button>show all</Button>
-                <Select options={props.authorsList || []} defaultValue='select author' />
+                <Button onClick={handleClick}>show all books</Button>
+                <Select options={props.authorsList || []} defaultValue='select author' onChange={handleChange} />
             </StyledBooksNavbar>
         </>
     )
