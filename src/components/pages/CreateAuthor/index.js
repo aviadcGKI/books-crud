@@ -13,10 +13,8 @@ function CreateAuthor() {
     const [isLoading, setIsLoading] = useState(false);
 
     //ref
-    const authorNameRef = useRef();
     const authorAgeRef = useRef();
     const authorCountryRef = useRef();
-    const authorimageRef = useRef();
 
     //get the authors collection
     const authorsCollectionRef = db.collection("authors");
@@ -67,23 +65,22 @@ function CreateAuthor() {
             <Form onSubmit={handleSubmit} >
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Author name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setAuthorName(e.target.value)} ref={authorNameRef} />
+                    <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setAuthorName(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Author Age</Form.Label>
-                    <NumberSelector setAge={setAuthorAge} ref={authorAgeRef} size={120} />
+                    <NumberSelector setNumber={setAuthorAge} ref={authorAgeRef} size={120} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Author Country</Form.Label>
-                    {/* <Form.Control type="text" placeholder="Password" /> */}
                     <CountrySelector setCountry={setAuthorCountry} ref={authorCountryRef} />
                 </Form.Group>
 
                 <Form.Group controlId="formFile" className="mb-3" onChange={handleImageChange}>
                     <Form.Label>Add an image</Form.Label>
-                    <Form.Control type="file" ref={authorimageRef} />
+                    <Form.Control type="file" />
                 </Form.Group>
                 <Button variant="primary" type="submit" >
                     Submit

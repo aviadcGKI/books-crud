@@ -6,6 +6,13 @@ import { StyledSpinner } from 'components/styledComponents';
 
 function CreateBook() {
 
+    const [bookTitle,setBookTitle] = useState('');
+    const [bookGenre,setBookGenre] = useState('');
+    const [bookPages,setBookPages] = useState(0);
+    const [bookPrice,setBookPrice] = useState('');
+    const [bookDatePublished,setBookDatePublished] = useState(null);
+    const [bookImage,setBookImage] = useState(null);
+
     const [isLoading,setIsLoading] = useState();
 
     return (
@@ -14,19 +21,19 @@ function CreateBook() {
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Title</Form.Label>
-                    <Form.Control placeholder="Enter Title" />
+                    <Form.Control placeholder="Enter Title" onChange={(e)=>setBookTitle(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>genre</Form.Label>
-                    <Form.Control placeholder="Enter genre" />
+                    <Form.Control placeholder="Enter genre" onChange={(e)=>setBookGenre(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>pages</Form.Label>
-                    <NumberSelector size={2000} />
+                    <NumberSelector size={500} setNumber={setBookPages} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>price</Form.Label>
-                    <Form.Control placeholder="Enter Price" />
+                    <Form.Control placeholder="Enter Price" onChange={(e)=>setBookPrice(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>date published</Form.Label>

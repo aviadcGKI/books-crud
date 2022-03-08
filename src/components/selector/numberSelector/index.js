@@ -4,14 +4,14 @@ import Select from 'react-select';
 
 
 function NumberSelector(props,ref) {
-  
+
   let options = new Array(props.size).fill().map((option,index)=>{
-      return {value: index+1 , label: index+1}
+      return {value: index+1 , label: index+1} 
   });
 
   const changeHandler = value => {
-    props.setAge(value.label);
-    console.log(ref.current,"ref value");
+    props.setNumber(value.label);
+    // console.log(ref.current,"ref value");
 }
 
   return (
