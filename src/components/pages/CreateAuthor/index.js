@@ -13,10 +13,10 @@ function CreateAuthor() {
     const [isLoading, setIsLoading] = useState(false);
 
     //ref
-    const authorNameRef = useRef(); 
-    const authorAgeRef = useRef(); 
-    const authorCountryRef = useRef(); 
-    const authorimageRef = useRef(); 
+    const authorNameRef = useRef();
+    const authorAgeRef = useRef();
+    const authorCountryRef = useRef();
+    const authorimageRef = useRef();
 
     //get the authors collection
     const authorsCollectionRef = db.collection("authors");
@@ -40,7 +40,8 @@ function CreateAuthor() {
             }
             const data = await authorsCollectionRef.add(author);
             console.log(data);
-            resetInputFields();
+            resetSelectFields();
+            e.target.reset();
             setIsLoading(false);
         } catch (e) {
             setIsLoading(false);
@@ -55,32 +56,23 @@ function CreateAuthor() {
         return await fileRef.getDownloadURL();
     }
 
-    const resetInputFields = ()=>{
-        authorNameRef.current.value = "";
+    const resetSelectFields = () => {
         authorAgeRef.current.selectOption('');
         authorCountryRef.current.selectOption('');
-        authorimageRef.current.value = null;
     }
 
     return (
         <>
             <h2>Add Author</h2>
-            <Form>
+            <Form onSubmit={handleSubmit} >
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Author name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setAuthorName(e.target.value)} ref={authorNameRef} />
-                    {/* <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-                </Form.Text> */}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Author Age</Form.Label>
                     <NumberSelector setAge={setAuthorAge} ref={authorAgeRef} size={120} />
-                    {/* <Form.Control type="text" placeholder="Enter email" /> */}
-                    {/* <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-                </Form.Text> */}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -93,7 +85,7 @@ function CreateAuthor() {
                     <Form.Label>Add an image</Form.Label>
                     <Form.Control type="file" ref={authorimageRef} />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                <Button variant="primary" type="submit" >
                     Submit
                 </Button>
             </Form>

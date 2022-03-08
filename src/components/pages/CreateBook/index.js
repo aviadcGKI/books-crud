@@ -1,6 +1,7 @@
 import React ,{useState} from 'react'
 import { Form, Button } from 'react-bootstrap';
 import NumberSelector from 'components/selector/numberSelector';
+import { DateSelector } from 'components/selector';
 import { StyledSpinner } from 'components/styledComponents';
 
 function CreateBook() {
@@ -26,6 +27,10 @@ function CreateBook() {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>price</Form.Label>
                     <Form.Control placeholder="Enter Price" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>date published</Form.Label>
+                    <DateSelector />
                 </Form.Group>
                 <Form.Group controlId="formFile" className="mb-3" >
                     <Form.Label>Add an image</Form.Label>
