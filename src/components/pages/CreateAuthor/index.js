@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { storage, db } from 'db'
 import CountrySelector from 'components/selector/countrySelector';
-import AgeSelector from 'components/selector/numberSelector';
+import AgeSelector from 'components/selector/ageSelector';
 import { StyledSpinner } from 'components/styledComponents';
 
 function CreateAuthor() {
