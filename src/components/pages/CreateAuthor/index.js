@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { storage, db } from 'db'
 import CountrySelector from 'components/selector/countrySelector';
-import NumberSelector from 'components/selector/numberSelector';
+import AgeSelector from 'components/selector/numberSelector';
 import { StyledSpinner } from 'components/styledComponents';
 
 function CreateAuthor() {
@@ -70,7 +70,7 @@ function CreateAuthor() {
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Author Age</Form.Label>
-                    <NumberSelector setNumber={setAuthorAge} ref={authorAgeRef} size={120} />
+                    <AgeSelector setNumber={setAuthorAge} ref={authorAgeRef} size={120} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -78,9 +78,9 @@ function CreateAuthor() {
                     <CountrySelector setCountry={setAuthorCountry} ref={authorCountryRef} />
                 </Form.Group>
 
-                <Form.Group controlId="formFile" className="mb-3" onChange={handleImageChange}>
+                <Form.Group controlId="formFile" className="mb-3" >
                     <Form.Label>Add an image</Form.Label>
-                    <Form.Control type="file" />
+                    <Form.Control type="file" onChange={handleImageChange}/>
                 </Form.Group>
                 <Button variant="primary" type="submit" >
                     Submit

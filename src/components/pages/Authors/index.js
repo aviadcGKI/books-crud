@@ -28,7 +28,7 @@ function Authors() {
     if (!authorsList) {
       getAllAuthors();
     }
-  },[])
+  }, [])
 
   const displayAuthorList = () => {
     return authorsList.map((author) => {

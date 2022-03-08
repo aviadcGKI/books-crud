@@ -3,10 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Card, Button } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 
-
-
 function Profile() {
-
 
   const location = useLocation()
   const history = useHistory();
@@ -21,11 +18,6 @@ function Profile() {
     }
     history.push('/createbook',state);
   }
-
-
-
-
-
 
   return (
     <>

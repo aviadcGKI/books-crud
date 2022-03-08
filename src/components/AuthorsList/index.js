@@ -11,7 +11,8 @@ function AuthorsList(props) {
       authorName: props.authorName,
       authorAge: props.authorAge,
       authorCountry: props.authorCountry,
-      imageUrl: props.imageUrl
+      imageUrl: props.imageUrl,
+      authorId: props.authorId
     }
     history.push(`/author/${props.authorId}`,state);
   }
