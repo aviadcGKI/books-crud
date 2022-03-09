@@ -3,7 +3,7 @@ import { db } from 'db'
 import { StyledListContainer } from 'components/styledComponents';
 import BooksList from 'components/BooksList';
 import BooksNavbar from 'components/booksNavbar';
-import { Button } from 'react-bootstrap';
+import Container from 'components/styledComponents/styledContainer'
 
 function Books() {
   const [booksList, setBooksList] = useState();
@@ -56,15 +56,15 @@ function Books() {
       getAllBooks();
     }
 
-    if(selctedAuthor){
-      const filterdList = booksList.filter((book)=>{
-        return book.author===selctedAuthor
+    if (selctedAuthor) {
+      const filterdList = booksList.filter((book) => {
+        return book.author === selctedAuthor
       })
       setBooksListFilterd(filterdList);
-    }else{
+    } else {
       setBooksListFilterd(booksList);
     }
-  }, [selctedAuthor,booksList]);
+  }, [selctedAuthor, booksList]);
 
 
   const displayBooksList = () => {
@@ -85,10 +85,12 @@ function Books() {
 
   return (
     <>
-      <BooksNavbar authorsList={authorsList} setSelectedAuthor={setSelectedAuthor} />
-      <StyledListContainer>
-        {booksListFilterd && displayBooksList()}
-      </StyledListContainer>
+      <Container>
+        <BooksNavbar authorsList={authorsList} setSelectedAuthor={setSelectedAuthor} />
+        <StyledListContainer>
+          {booksListFilterd && displayBooksList()}
+        </StyledListContainer>
+      </Container>
 
     </>
   )

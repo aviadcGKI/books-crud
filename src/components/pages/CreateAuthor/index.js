@@ -4,6 +4,7 @@ import { storage, db } from 'db'
 import CountrySelector from 'components/selector/countrySelector';
 import AgeSelector from 'components/selector/ageSelector';
 import { StyledSpinner } from 'components/styledComponents';
+import Container from 'components/styledComponents/styledContainer';
 
 function CreateAuthor() {
     const [authorName, setAuthorName] = useState('');
@@ -61,32 +62,34 @@ function CreateAuthor() {
 
     return (
         <>
-            <h2>Add Author</h2>
-            <Form onSubmit={handleSubmit} >
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Author name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setAuthorName(e.target.value)} />
-                </Form.Group>
+            <Container justify='center'>
+                <h2>Add Author</h2>
+                <Form onSubmit={handleSubmit} >
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Author name</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setAuthorName(e.target.value)} />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Author Age</Form.Label>
-                    <AgeSelector setNumber={setAuthorAge} ref={authorAgeRef} size={120} />
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Author Age</Form.Label>
+                        <AgeSelector setNumber={setAuthorAge} ref={authorAgeRef} size={120} />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Author Country</Form.Label>
-                    <CountrySelector setCountry={setAuthorCountry} ref={authorCountryRef} />
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Author Country</Form.Label>
+                        <CountrySelector setCountry={setAuthorCountry} ref={authorCountryRef} />
+                    </Form.Group>
 
-                <Form.Group controlId="formFile" className="mb-3" >
-                    <Form.Label>Add an image</Form.Label>
-                    <Form.Control type="file" onChange={handleImageChange}/>
-                </Form.Group>
-                <Button variant="primary" type="submit" >
-                    Submit
-                </Button>
-            </Form>
-            {isLoading && <StyledSpinner />}
+                    <Form.Group controlId="formFile" className="mb-3" >
+                        <Form.Label>Add an image</Form.Label>
+                        <Form.Control type="file" onChange={handleImageChange} />
+                    </Form.Group>
+                    <Button variant="primary" type="submit" >
+                        Submit
+                    </Button>
+                </Form>
+                {isLoading && <StyledSpinner />}
+            </Container>
         </>
     )
 }

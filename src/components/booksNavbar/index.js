@@ -1,15 +1,15 @@
-import React ,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { StyledBooksNavbar } from 'components/styledComponents'
 import Select from 'react-select'
 import { Button } from 'react-bootstrap';
 
 function BooksNavbar(props) {
 
-    const handleChange = (value)=>{
+    const handleChange = (value) => {
         props.setSelectedAuthor(value.value);
     }
 
-    const handleClick = ()=>{
+    const handleClick = () => {
         props.setSelectedAuthor(null);
     }
 
@@ -17,7 +17,9 @@ function BooksNavbar(props) {
         <>
             <StyledBooksNavbar>
                 <Button onClick={handleClick}>show all books</Button>
-                <Select options={props.authorsList || []} defaultValue='select author' onChange={handleChange} />
+                <div style={{width: '10rem'}}>
+                    <Select options={props.authorsList || []} defaultValue='select author' onChange={handleChange} />
+                </div>
             </StyledBooksNavbar>
         </>
     )
