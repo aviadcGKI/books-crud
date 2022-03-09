@@ -47,7 +47,7 @@ const Authors = () => {
   return (
     <Container justify='center'>
       <StyledListContainer>
-        {authorsList.length && displayAuthorList()}
+        {!!authorsList.length && displayAuthorList()}
       </StyledListContainer>
     </Container>
   )

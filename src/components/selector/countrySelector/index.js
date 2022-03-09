@@ -1,21 +1,14 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useMemo } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 
-function CountrySelector(props,ref) {
-    const [value, setValue] = useState('');
-    const options = useMemo(() => countryList().getData(), []);
+export const CountrySelector = React.forwardRef((props, ref) => {
 
-    const changeHandler = value => {
-        setValue(value)
-    }
+  const options = useMemo(() => countryList().getData(), []);
 
-    useEffect(()=>{
-        //send the country to create author component
-        props.setCountry(value.label);
-    },[value,props])
+  const changeHandle = value => {
+    props.onChange({ name: 'country', value: value.label });
+  }
+  return <Select options={options} onChange={changeHandle} ref={ref} />
+})
 
-  return <Select options={options} value={value} onChange={changeHandler} ref={ref} />
-}
-
-export default React.forwardRef(CountrySelector);

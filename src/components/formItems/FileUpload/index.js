@@ -1,8 +1,12 @@
 import React from 'react'
+import {Form,Col} from 'react-bootstrap'
 
-const FileUpload = () => {
+const FileUpload = ({name,onChange}) => {
   return (
-    <div>FileUpload</div>
+    <Col md>
+      <Form.Label>Add an image</Form.Label>
+      <Form.Control type="file" name={name} onChange={onChange} />
+    </Col>
   )
 }
 
