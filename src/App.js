@@ -1,8 +1,7 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from 'components/navbar';
 import { Profile, Authors, Books, Home, CreateBook, CreateAuthor, BookDetails } from 'components/pages';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

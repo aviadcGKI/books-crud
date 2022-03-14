@@ -58,23 +58,22 @@ function Books() {
 
   }, [booksList]);
 
-  const handleSelectedAuthor = async (selectedAuthor)=>{
-    if(!selectedAuthor){
-      setBooksListFilterd([...booksList]);
-      return;
+  const handleSelectedAuthor = async (selectedAuthor) => {
+    if (!selectedAuthor) {
+      return setBooksListFilterd(booksList);
     }
-    try{
-      const authorData = await authorsCollectionRef.doc(selectedAuthor).get();
-      console.log(authorData);
+    try {
       const activeBooksList = [];
-      await Promise.all(authorData.data().books.map(async(book)=>{
-        const bookData = await booksCollectionRef.doc(book).get();
-        activeBooksList.push({ ...bookData.data(), id: bookData.id })
-        // console.log(bookData);
-      }));
-      console.log(activeBooksList,"activebook");
-      setBooksListFilterd( activeBooksList);
-    }catch(e){
+      const booksData = await booksCollectionRef.where("author", "==", selectedAuthor).where("isActive", "==", true).get();
+      console.log(booksData);
+      booksData.docs.forEach((book) => {
+        activeBooksList.push({ ...book.data(), id: book.id })
+      })
+      // console.log(bookData);
+
+      console.log(activeBooksList, "activebook");
+      setBooksListFilterd(activeBooksList);
+    } catch (e) {
       console.log(e);
     }
   }
