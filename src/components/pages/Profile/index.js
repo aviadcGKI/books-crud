@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from "react-router-dom";
+import { useLocation , useHistory } from "react-router-dom";
 import { Card, Button } from 'react-bootstrap';
-import { useHistory } from "react-router-dom";
 import Container from 'components/styledComponents/styledContainer';
 
 function Profile() {
@@ -32,7 +31,7 @@ function Profile() {
             <Card.Title>Age: {location.state.authorAge}</Card.Title>
             <Card.Title>Country: {location.state.authorCountry}</Card.Title>
             <Button variant="primary" onClick={goToCreateBook}>Add Book</Button>
-            <Button variant="primary" >Show books</Button>
+            
           </Card.Body>
         </Card>
       </Container>

@@ -6,15 +6,17 @@ function BooksList(props) {
 
   const history = useHistory();
 
-  const goToProfile = () => {
-    const state = {
-    //   authorName: props.authorName,
-    //   authorAge: props.authorAge,
-    //   authorCountry: props.authorCountry,
-    //   imageUrl: props.imageUrl,
-    //   authorId: props.authorId
+  const goToBookDetails = () => {
+    const book = {
+      bookTitle: props.bookTitle,
+      bookGenre: props.bookGenre,
+      bookPrice: props.bookPrice,
+      bookPages: props.bookPages,
+      bookDescription: props.bookDescription,
+      bookAuthor: props.bookAuthor,
+      imageUrl: props.imageUrl
     }
-    // history.push(`/author/${props.authorId}`,state);
+    history.push(`/book/${props.bookId}`,book);
   }
   return (
     <>
@@ -22,7 +24,7 @@ function BooksList(props) {
         <Card.Img variant="top" src={props.imageUrl} height="250" />
         <Card.Body>
           <Card.Title>{props.bookTitle}</Card.Title>
-          <Button variant="primary" onClick={goToProfile}>More details</Button>
+          <Button variant="primary" onClick={goToBookDetails}>More details</Button>
         </Card.Body>
       </Card>
     </>

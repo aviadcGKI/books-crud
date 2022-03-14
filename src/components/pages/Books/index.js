@@ -4,12 +4,15 @@ import { StyledListContainer } from 'components/styledComponents';
 import BooksList from 'components/BooksList';
 import BooksNavbar from 'components/BooksNavbar';
 import Container from 'components/styledComponents/styledContainer'
+import { useHistory } from "react-router-dom";
 
 function Books() {
   const [booksList, setBooksList] = useState();
   const [booksListFilterd, setBooksListFilterd] = useState();
   const [authorsList, setAuthorsList] = useState();
   // const [selectedAuthor, setSelectedAuthor] = useState(null);
+
+  const history = useHistory();
 
   //get the collections ref
   const booksCollectionRef = db.collection("books");
@@ -55,23 +58,22 @@ function Books() {
 
   }, [booksList]);
 
-  const handleSelectedAuthor = async (selectedAuthor)=>{
-    if(!selectedAuthor){
-      setBooksListFilterd([...booksList]);
-      return;
+  const handleSelectedAuthor = async (selectedAuthor) => {
+    if (!selectedAuthor) {
+      return setBooksListFilterd(booksList);
     }
-    try{
-      const authorData = await authorsCollectionRef.doc(selectedAuthor).get();
-      console.log(authorData);
+    try {
       const activeBooksList = [];
-      await Promise.all(authorData.data().books.map(async(book)=>{
-        const bookData = await booksCollectionRef.doc(book).get();
-        activeBooksList.push({ ...bookData.data(), id: bookData.id })
-        // console.log(bookData);
-      }));
-      console.log(activeBooksList,"activebook");
-      setBooksListFilterd( activeBooksList);
-    }catch(e){
+      const booksData = await booksCollectionRef.where("author", "==", selectedAuthor).where("isActive", "==", true).get();
+      console.log(booksData);
+      booksData.docs.forEach((book) => {
+        activeBooksList.push({ ...book.data(), id: book.id })
+      })
+      // console.log(bookData);
+
+      console.log(activeBooksList, "activebook");
+      setBooksListFilterd(activeBooksList);
+    } catch (e) {
       console.log(e);
     }
   }
