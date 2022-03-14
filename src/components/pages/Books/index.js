@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { db } from 'db'
 import { StyledListContainer } from 'components/styledComponents';
 import BooksList from 'components/BooksList';
@@ -69,9 +69,6 @@ function Books() {
       booksData.docs.forEach((book) => {
         activeBooksList.push({ ...book.data(), id: book.id })
       })
-      // console.log(bookData);
-
-      console.log(activeBooksList, "activebook");
       setBooksListFilterd(activeBooksList);
     } catch (e) {
       console.log(e);

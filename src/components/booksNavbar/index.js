@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { StyledBooksNavbar } from 'components/styledComponents'
 import Select from 'react-select'
 import { Button } from 'react-bootstrap';
