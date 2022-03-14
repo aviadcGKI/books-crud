@@ -33,7 +33,8 @@ function CreateAuthor() {
             const author = {
                 ...authorData,
                 imageUrl: authorImageUrl,
-                isActive: true
+                isActive: true,
+                books: []
             }
             const data = await authorsCollectionRef.add(author);
             console.log(data);

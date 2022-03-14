@@ -28,9 +28,9 @@ function Profile() {
         <Card style={{ width: '20rem', height: '25rem' }}>
           <Card.Img variant="top" src={location.state.imageUrl} height="400" />
           <Card.Body>
-            <Card.Title>{location.state.authorName}</Card.Title>
-            <Card.Title>{location.state.authorAge}</Card.Title>
-            <Card.Title>{location.state.authorCountry}</Card.Title>
+            <Card.Title>Name: {location.state.authorName}</Card.Title>
+            <Card.Title>Age: {location.state.authorAge}</Card.Title>
+            <Card.Title>Country: {location.state.authorCountry}</Card.Title>
             <Button variant="primary" onClick={goToCreateBook}>Add Book</Button>
             <Button variant="primary" >Show books</Button>
           </Card.Body>

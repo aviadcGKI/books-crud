@@ -13,12 +13,10 @@ const Authors = () => {
   useEffect(() => {
     const getAllAuthors = async () => {
       try {
-        const data = await authorsCollectionRef.get();
+        const data = await authorsCollectionRef.where("isActive","==",true).get();
         const activeAuthorsList = [];
         data.docs.forEach((doc) => {
-          if (doc.data().isActive) {
-            activeAuthorsList.push({ ...doc.data(), id: doc.id })
-          }
+          activeAuthorsList.push({ ...doc.data(), id: doc.id })
         });
         setAuthorsList(activeAuthorsList);
         console.log(data);
