@@ -2,7 +2,7 @@ import React , {useState} from 'react'
 import { NavbarContainer, LeftNavbarContainer, RightNavbarContainer
 ,NavbarInnerContainer, NavbarExtendedContainer, NavbarLinkContainer
 ,NavbarLink, NavbarLinkExtended , LogoContainer, OpenLinksButton } from '../styledComponents/styledNavbar'
-import logo from '../../components/assets/images/logo.jpg'
+import logo from 'components/assets/images/logo.jpg'
 
 function Navbar() {
 
