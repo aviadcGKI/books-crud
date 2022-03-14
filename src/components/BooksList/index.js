@@ -21,7 +21,7 @@ function BooksList(props) {
   return (
     <>
       <Card style={{ width: '15rem', height: '22rem' }}>
-        <Card.Img variant="top" src={props.imageUrl} height="250" />
+        <Card.Img variant="top" src={props.imageUrl} height='70%' />
         <Card.Body>
           <Card.Title>{props.bookTitle}</Card.Title>
           <Button variant="primary" onClick={goToBookDetails}>More details</Button>

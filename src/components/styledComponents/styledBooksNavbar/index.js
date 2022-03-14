@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-const StyledBooksNavbar = styled.nav`
+export default styled.nav`
     width: 100% ;
     /* border: 1px solid black; */
     height: 6vh ;
@@ -9,5 +9,3 @@ const StyledBooksNavbar = styled.nav`
     align-items: center ;
     gap: 1rem
 `
-
-export default StyledBooksNavbar

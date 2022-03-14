@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-const Container = styled.div`
+export default styled.div`
     height: 80vh;
     display: flex;
     justify-content: ${props=>props.justify};
@@ -9,5 +9,3 @@ const Container = styled.div`
     margin-top: ${props=>props.marginTop} ;
     /* border: 1px solid green ; */
 `;
-
-export default Container
