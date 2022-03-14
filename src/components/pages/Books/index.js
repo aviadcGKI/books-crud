@@ -4,7 +4,7 @@ import { db } from 'db'
 
 import Container from 'components/styledComponents/styledContainer'
 import { StyledListContainer } from 'components/styledComponents';
-import BooksNavbar from 'components/BooksNavbar';
+import BooksNavbar from '../../BooksNavbar';
 import BooksList from 'components/BooksList';
 
 const Books = () => {

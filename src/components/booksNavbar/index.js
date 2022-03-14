@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { StyledBooksNavbar } from 'components/styledComponents';
 
 
-function BooksNavbar(props) {
+const BooksNavbar = (props) => {
 
     const handleChange = (value) => {
         props.handleSelectedAuthor(value.value);
