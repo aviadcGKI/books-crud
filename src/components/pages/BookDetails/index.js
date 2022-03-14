@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom";
 import {
     StyledCardContainer, StyledCardImage, StyledCardDetailsContainer, StyledCardDetialsTitle,
-    StyledCardDetialsContent, StyledCardDetailsRow
+    StyledCardDetialsContent
 } from 'components/styledComponents/styledCard';
 import Container from 'components/styledComponents/styledContainer'
 

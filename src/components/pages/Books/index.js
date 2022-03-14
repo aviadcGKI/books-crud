@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { db } from 'db'
 
 import Container from 'components/styledComponents/styledContainer'
@@ -14,7 +14,7 @@ const Books = () => {
   const [authorsList, setAuthorsList] = useState();
   // const [selectedAuthor, setSelectedAuthor] = useState(null);
 
-  const history = useHistory();
+  // const history = useHistory();
 
   //get the collections ref
   const booksCollectionRef = db.collection("books");
@@ -58,7 +58,7 @@ const Books = () => {
       getAllBooks();
     }
 
-  }, [booksList]);
+  }, [booksList,authorsCollectionRef,authorsList,booksCollectionRef]);
 
   const handleSelectedAuthor = async (selectedAuthor) => {
     if (!selectedAuthor) {

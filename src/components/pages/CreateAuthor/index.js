@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Form, Button, Row } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { storage, db } from 'db'
 import { StyledSpinner } from 'components/styledComponents';
 import Container from 'components/styledComponents/styledContainer';
@@ -77,7 +77,7 @@ function CreateAuthor() {
                     <AgePicker onChange={handleSelcetChange} ref={authorAgeRef} />
                     <CountryPicker onChange={handleSelcetChange} ref={authorCountryRef} />
                     <FileUpload name='file' onChange={handleImageChange} />
-                    <Button variant="primary" type="submit" style={{marginTop: '1rem'}} >
+                    <Button variant="primary" type="submit" style={{ marginTop: '1rem' }} >
                         Submit
                     </Button>
                 </Form>

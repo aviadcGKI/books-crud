@@ -27,7 +27,7 @@ const Authors = () => {
     if (!authorsList.length) {
       getAllAuthors();
     }
-  }, [])
+  }, [authorsCollectionRef,authorsList.length,])
 
   const displayAuthorList = () => {
     return authorsList.map((author) => {
