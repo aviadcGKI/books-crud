@@ -6,7 +6,7 @@ import Container from 'components/styledComponents/styledContainer'
 import { StyledListContainer } from 'components/styledComponents';
 
 import BooksList from 'components/BooksList';
-import BooksNavbar from 'components/BooksNavbar/index.js';
+import BooksNavbar from 'components/booksNavbar';
 
 const Books = () => {
   const [booksList, setBooksList] = useState();
