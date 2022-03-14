@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 import { db } from 'db'
 
 import Container from 'components/styledComponents/styledContainer'
-import { BooksNavbar, BooksList } from 'components';
 import { StyledListContainer } from 'components/styledComponents';
-
+import BooksNavbar from 'components/BooksNavbar';
+import BooksList from 'components/BooksList';
 
 const Books = () => {
   const [booksList, setBooksList] = useState();
