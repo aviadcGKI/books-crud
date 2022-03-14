@@ -4,8 +4,9 @@ import { db } from 'db'
 
 import Container from 'components/styledComponents/styledContainer'
 import { StyledListContainer } from 'components/styledComponents';
-import BooksNavbar from '../../BooksNavbar';
+
 import BooksList from 'components/BooksList';
+import BooksNavbar from 'components/booksNavbar';
 
 const Books = () => {
   const [booksList, setBooksList] = useState();

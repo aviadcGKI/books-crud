@@ -8,5 +8,5 @@ export default styled.div`
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 `;
