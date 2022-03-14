@@ -3,14 +3,14 @@ import Select from 'react-select';
 
 
 
-function AgeSelector(props,ref) {
+export const AgeSelector = React.forwardRef((props,ref)=> {
 
   let options = new Array(props.size).fill().map((option,index)=>{
       return {value: index+1 , label: index+1} 
   });
 
   const changeHandler = value => {
-    props.setAge(value.label);
+    props.onChange({name: 'age',value: value.label});
     // console.log(ref.current,"ref value");
 }
 
@@ -24,6 +24,6 @@ function AgeSelector(props,ref) {
       />
     </div>
   );
-}
+})
 
-export default React.forwardRef(AgeSelector);
+// export default React.forwardRef(AgeSelector);

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { db } from 'db'
+import { useState, useEffect } from 'react';
+import { db } from 'db';
 import { StyledListContainer } from 'components/styledComponents';
 import AuthorsList from 'components/AuthorsList';
+import Container from 'components/styledComponents/styledContainer';
 
-function Authors() {
-  const [authorsList, setAuthorsList] = useState(null);
+const Authors = () => {
+  const [authorsList, setAuthorsList] = useState([]);
 
   //get the authors collection
   const authorsCollectionRef = db.collection("authors");
@@ -12,12 +13,10 @@ function Authors() {
   useEffect(() => {
     const getAllAuthors = async () => {
       try {
-        const data = await authorsCollectionRef.get();
+        const data = await authorsCollectionRef.where("isActive","==",true).get();
         const activeAuthorsList = [];
         data.docs.forEach((doc) => {
-          if (doc.data().isActive) {
-            activeAuthorsList.push({ ...doc.data(), id: doc.id })
-          }
+          activeAuthorsList.push({ ...doc.data(), id: doc.id })
         });
         setAuthorsList(activeAuthorsList);
         console.log(data);
@@ -25,7 +24,7 @@ function Authors() {
         console.log(e);
       }
     };
-    if (!authorsList) {
+    if (!authorsList.length) {
       getAllAuthors();
     }
   }, [])
@@ -44,12 +43,11 @@ function Authors() {
   }
 
   return (
-    <>
+    <Container justify='center'>
       <StyledListContainer>
-        {authorsList && displayAuthorList()}
+        {!!authorsList.length && displayAuthorList()}
       </StyledListContainer>
-
-    </>
+    </Container>
   )
 }
 

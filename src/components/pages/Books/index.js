@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { db } from 'db'
 import { StyledListContainer } from 'components/styledComponents';
 import BooksList from 'components/BooksList';
-import BooksNavbar from 'components/booksNavbar';
-import { Button } from 'react-bootstrap';
+import BooksNavbar from 'components/BooksNavbar';
+import Container from 'components/styledComponents/styledContainer'
 
 function Books() {
   const [booksList, setBooksList] = useState();
   const [booksListFilterd, setBooksListFilterd] = useState();
   const [authorsList, setAuthorsList] = useState();
-  const [selctedAuthor, setSelectedAuthor] = useState(null);
+  // const [selectedAuthor, setSelectedAuthor] = useState(null);
 
   //get the collections ref
   const booksCollectionRef = db.collection("books");
@@ -18,14 +18,13 @@ function Books() {
   useEffect(() => {
     const getAllBooks = async () => {
       try {
-        const data = await booksCollectionRef.get();
+        const data = await booksCollectionRef.where("isActive", "==", true).get();
         const activeBooksList = [];
         data.docs.forEach((doc) => {
-          if (doc.data().isActive) {
-            activeBooksList.push({ ...doc.data(), id: doc.id })
-          }
+          activeBooksList.push({ ...doc.data(), id: doc.id })
         });
         setBooksList([...activeBooksList]);
+        setBooksListFilterd([...activeBooksList]);
         console.log(data);
       } catch (e) {
         console.log(e);
@@ -34,12 +33,10 @@ function Books() {
 
     const getAllAuthors = async () => {
       try {
-        const data = await authorsCollectionRef.get();
+        const data = await authorsCollectionRef.where("isActive", "==", true).get();
         const activeAuthorsList = [];
         data.docs.forEach((doc) => {
-          if (doc.data().isActive) {
-            activeAuthorsList.push({ value: doc.id, label: doc.data().name })
-          }
+          activeAuthorsList.push({ value: doc.id, label: doc.data().name })
         });
         setAuthorsList(activeAuthorsList);
         console.log(data);
@@ -56,16 +53,28 @@ function Books() {
       getAllBooks();
     }
 
-    if(selctedAuthor){
-      const filterdList = booksList.filter((book)=>{
-        return book.author===selctedAuthor
-      })
-      setBooksListFilterd(filterdList);
-    }else{
-      setBooksListFilterd(booksList);
-    }
-  }, [selctedAuthor,booksList]);
+  }, [booksList]);
 
+  const handleSelectedAuthor = async (selectedAuthor)=>{
+    if(!selectedAuthor){
+      setBooksListFilterd([...booksList]);
+      return;
+    }
+    try{
+      const authorData = await authorsCollectionRef.doc(selectedAuthor).get();
+      console.log(authorData);
+      const activeBooksList = [];
+      await Promise.all(authorData.data().books.map(async(book)=>{
+        const bookData = await booksCollectionRef.doc(book).get();
+        activeBooksList.push({ ...bookData.data(), id: bookData.id })
+        // console.log(bookData);
+      }));
+      console.log(activeBooksList,"activebook");
+      setBooksListFilterd( activeBooksList);
+    }catch(e){
+      console.log(e);
+    }
+  }
 
   const displayBooksList = () => {
     return booksListFilterd.map((book) => {
@@ -85,10 +94,12 @@ function Books() {
 
   return (
     <>
-      <BooksNavbar authorsList={authorsList} setSelectedAuthor={setSelectedAuthor} />
-      <StyledListContainer>
-        {booksListFilterd && displayBooksList()}
-      </StyledListContainer>
+      <Container>
+        <BooksNavbar authorsList={authorsList} handleSelectedAuthor={handleSelectedAuthor} />
+        <StyledListContainer>
+          {booksListFilterd && displayBooksList()}
+        </StyledListContainer>
+      </Container>
 
     </>
   )

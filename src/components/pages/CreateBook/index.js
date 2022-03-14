@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
-import { Form, Button, Row, Col, FloatingLabel } from 'react-bootstrap';
-import { DateSelector } from 'components/selector';
+import { Form, Button, Row } from 'react-bootstrap';
 import { StyledSpinner } from 'components/styledComponents';
 import { storage, db } from 'db'
 import firebase from "firebase/app";
 import { useLocation } from "react-router-dom";
+import Container from 'components/styledComponents/styledContainer';
+import { Input, TextArea, DatePicker, FileUpload } from 'components/formItems';
 
 function CreateBook() {
-    const [bookTitle, setBookTitle] = useState('');
-    const [bookGenre, setBookGenre] = useState('');
-    const [bookPages, setBookPages] = useState('');
-    const [bookPrice, setBookPrice] = useState('');
-    const [bookDescription, setBookDescription] = useState('');
-    const [bookDatePublished, setBookDatePublished] = useState(null);
     const [bookImage, setBookImage] = useState(null);
     const [isLoading, setIsLoading] = useState();
+    const [bookData, setBookData] = useState({ title: '', genre: '', pages: '', price: '', description: '', datePublished: ''});
 
     const location = useLocation();
 
@@ -26,6 +22,10 @@ function CreateBook() {
         setBookImage(e.target.files[0]);
     }
 
+    const handleDateChange = (date) => {
+        setBookData({ ...bookData, datePublished: date });
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -33,14 +33,9 @@ function CreateBook() {
             const authorId = location.state.authorId;
             const bookImageUrl = await handleImageUpload(bookImage);
             console.log(bookImageUrl);
-            console.log(location,"author id");
+            console.log(location, "author id");
             const book = {
-                title: bookTitle,
-                genre: bookGenre,
-                pages: bookPages,
-                price: bookPrice,
-                description: bookDescription,
-                datePublished: bookDatePublished,
+                ...bookData,
                 imageUrl: bookImageUrl,
                 author: authorId,
                 isActive: true
@@ -49,6 +44,7 @@ function CreateBook() {
             authorsCollectionRef.doc(authorId).update({
                 books: firebase.firestore.FieldValue.arrayUnion(newBookData.id)
             });
+            console.log(book);
             e.target.reset();
             setIsLoading(false);
         } catch (e) {
@@ -64,62 +60,35 @@ function CreateBook() {
         return await fileRef.getDownloadURL();
     }
 
+    const handleChange = ({ target }) => {
+        const { name, value } = target;
+        setBookData({ ...bookData, [name]: value });
+    }
+
     return (
-        <>
+        <Container justify='center'>
             <h2>Add Book</h2>
             <Form onSubmit={handleSubmit}>
                 <Row className="g-2">
-                    <Col md>
-                        <Form.Label>Title</Form.Label>
-                        <FloatingLabel controlId="floatingInputGrid" label="Enter title">
-                            <Form.Control placeholder="Enter Title" onChange={(e) => setBookTitle(e.target.value)} />
-                        </FloatingLabel>
-                    </Col>
-                    <Col md>
-                        <Form.Label>genre</Form.Label>
-                        <FloatingLabel controlId="floatingInputGrid" label="Enter genre">
-                            <Form.Control placeholder="Enter genre" onChange={(e) => setBookGenre(e.target.value)} />
-                        </FloatingLabel>
-                    </Col>
+                    {/* <CustomColum name={name} handleChange={handleChange} placeHolder="Enter Title" */}
+                    <Input type='text' name='title' placeholder='Enter Title' onChange={handleChange} />
+                    <Input type='text' name='genre' placeholder='Enter Genre' onChange={handleChange} />
                 </Row>
                 <Row className="g-2">
-                    <Col md>
-                        <Form.Label>pages</Form.Label>
-                        <FloatingLabel controlId="floatingInputGrid" label="Enter pages">
-                            <Form.Control placeholder="Enter pages" onChange={(e) => setBookPages(e.target.value)} />
-                        </FloatingLabel>
-                    </Col>
-                    <Col md>
-                        <Form.Label>price</Form.Label>
-                        <FloatingLabel controlId="floatingInputGrid" label="Enter price">
-                            <Form.Control placeholder="Enter Price" onChange={(e) => setBookPrice(e.target.value)} />
-                        </FloatingLabel>
-                    </Col>
+                    <Input type='number' name='pages' placeholder='Enter Pages' onChange={handleChange} />
+                    <Input type='number' name='price' placeholder='Enter Price' onChange={handleChange} />
                 </Row>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>description</Form.Label>
-                    <Form.Control as="textarea" rows={3} placeholder="Enter description" onChange={(e) => setBookDescription(e.target.value)} />
-                </Form.Group>
+                <TextArea name='description' rows='3' placeholder='Enter Description' onChange={handleChange} />
                 <Row className="g-2">
-                    <Col md>
-                        <Form.Label>date published</Form.Label>
-                        <FloatingLabel controlId="floatingInputGrid" >
-                            <DateSelector setDatePublished={setBookDatePublished} />
-                        </FloatingLabel>
-                    </Col>
-                    <Col md>
-                        <Form.Label>Add an image</Form.Label>
-                        <FloatingLabel controlId="floatingInputGrid" >
-                            <Form.Control type="file" onChange={handleImageChange} />
-                        </FloatingLabel>
-                    </Col>
+                    <DatePicker onChange={handleDateChange} />
+                    <FileUpload name='file' onChange={handleImageChange} />
                 </Row>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
                 {isLoading && <StyledSpinner />}
             </Form>
-        </>
+        </Container>
     )
 }
 

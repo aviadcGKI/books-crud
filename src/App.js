@@ -1,7 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route } from "react-router-dom";
-import Container from './components/styledComponents/styledContainer';
 import Navbar from 'components/navbar';
 import { Profile, Authors, Books, Home, CreateBook, CreateAuthor } from 'components/pages';
 
@@ -10,14 +9,12 @@ function App() {
     <div>
       <BrowserRouter>
         <Navbar />
-        <Container>
           <Route path="/" exact component={Home} />
           <Route path="/authors" exact component={Authors} />
           <Route path="/createBook" exact component={CreateBook} />
           <Route path="/books" exact component={Books} />
           <Route path="/author/:id" exact component={Profile} />
           <Route path="/createAuthor" exact component={CreateAuthor} />
-        </Container>
       </BrowserRouter>
     </div>
   )
