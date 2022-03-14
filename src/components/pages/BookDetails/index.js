@@ -1,46 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom";
-import { Card, Button } from 'react-bootstrap';
-import { useHistory } from "react-router-dom";
-import Container from 'components/styledComponents/styledContainer';
-import BackNavbar from 'components/BackNavbar';
+import {
+    StyledCardContainer, StyledCardImage, StyledCardDetailsContainer, StyledCardDetialsTitle,
+    StyledCardDetialsContent, StyledCardDetailsRow
+} from 'components/styledComponents/styledCard';
+import Container from 'components/styledComponents/styledContainer'
 
 function BookDetails() {
 
     const location = useLocation()
-    const history = useHistory();
-    const [authorData,] = useState(location.state);
 
-    useEffect(() => {
-        console.log(location.state);
-    }, [location.state]);
-
-    const goToCreateBook = () => {
-        const { authorId } = authorData;
-        // const state = {
-        //   authorId: location.state.authorId
-        // }
-        history.push('/createbook', { authorId });
-    }
 
     return (
-        <>
-            <BackNavbar></BackNavbar>
-            <Container marginTop='4rem'>
-                <Card style={{ width: '20rem', height: '40rem' }}>
-                    <Card.Img variant="top" src={location.state.imageUrl} height="400" />
-                    <Card.Body>
-                        <Card.Title>Title: {location.state.bookTitle}</Card.Title>
-                        <Card.Title>Genre: {location.state.bookGenre}</Card.Title>
-                        <Card.Title>Price: {location.state.bookPrice}</Card.Title>
-                        <Card.Title>Pages: {location.state.bookPages}</Card.Title>
-                        <Card.Title>Description: {location.state.bookDescription}</Card.Title>
-                        <Card.Title>Author: {location.state.bookAuthor}</Card.Title>
-                    </Card.Body>
-                </Card>
-            </Container>
-        </>
+        <Container justify='center'>
+            <StyledCardContainer>
+                <StyledCardImage> <img src={location.state.imageUrl} width="100%" height="100%" alt='book'/> </StyledCardImage>
+                <StyledCardDetailsContainer>
+                    <StyledCardDetialsTitle> Title:</StyledCardDetialsTitle>
+                    <StyledCardDetialsContent> {location.state.bookTitle} </StyledCardDetialsContent>
+                    <StyledCardDetialsTitle> Genre:</StyledCardDetialsTitle>
+                    <StyledCardDetialsContent> {location.state.bookGenre} </StyledCardDetialsContent>
+                    <StyledCardDetialsTitle> Pages:</StyledCardDetialsTitle>
+                    <StyledCardDetialsContent> {location.state.bookPages} </StyledCardDetialsContent>
+                    <StyledCardDetialsTitle> Price:</StyledCardDetialsTitle>
+                    <StyledCardDetialsContent> {location.state.bookPrice} </StyledCardDetialsContent>
+                    <StyledCardDetialsTitle> Author:</StyledCardDetialsTitle>
+                    <StyledCardDetialsContent> {location.state.bookAuthor} </StyledCardDetialsContent>
+                </StyledCardDetailsContainer>
+            </StyledCardContainer>
+        </Container>
+
     )
+
+
 }
 
 export default BookDetails

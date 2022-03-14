@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
-import { db } from 'db'
-import { StyledListContainer } from 'components/styledComponents';
-import BooksList from 'components/BooksList';
-import BooksNavbar from 'components/BooksNavbar';
-import Container from 'components/styledComponents/styledContainer'
 import { useHistory } from "react-router-dom";
+import { db } from 'db'
 
-function Books() {
+import Container from 'components/styledComponents/styledContainer'
+import { BooksNavbar, BooksList } from 'components';
+import { StyledListContainer } from 'components/styledComponents';
+
+
+const Books = () => {
   const [booksList, setBooksList] = useState();
   const [booksListFilterd, setBooksListFilterd] = useState();
   const [authorsList, setAuthorsList] = useState();
@@ -81,11 +82,11 @@ function Books() {
         key={Math.random()}
         bookId={book.id}
         bookTitle={book.title}
-        bookGenre={book.Genre}
+        bookGenre={book.genre}
         bookPrice={book.price}
         bookPages={book.pages}
         bookDescription={book.description}
-        bookAuthor={book.Author}
+        bookAuthor={book.author}
         imageUrl={book.imageUrl}
       />
     })

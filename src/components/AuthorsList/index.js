@@ -17,7 +17,7 @@ const AuthorsList = ({ authorName, authorAge, authorCountry, imageUrl, authorId 
   }
   return (
     <Card style={{ width: '15rem', height: '22rem' }}>
-      <Card.Img variant="top" src={imageUrl} height="250" />
+      <Card.Img variant="top" src={imageUrl} height="70%" />
       <Card.Body>
         <Card.Title>{authorName}</Card.Title>
         <Button variant="primary" onClick={goToProfile}>Go to profile</Button>
