@@ -58,7 +58,7 @@ const Books = () => {
       getAllBooks();
     }
 
-  }, [booksList,authorsCollectionRef,authorsList,booksCollectionRef]);
+  }, [booksList, authorsCollectionRef, authorsList, booksCollectionRef]);
 
   const handleSelectedAuthor = async (selectedAuthor) => {
     if (!selectedAuthor) {
@@ -67,7 +67,7 @@ const Books = () => {
     try {
       const activeBooksList = [];
       const booksData = await booksCollectionRef.where("author", "==", selectedAuthor).where("isActive", "==", true).get();
-      console.log(booksData);
+      // console.log(booksData);
       booksData.docs.forEach((book) => {
         activeBooksList.push({ ...book.data(), id: book.id })
       })
