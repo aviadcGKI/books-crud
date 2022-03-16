@@ -5,7 +5,7 @@ import { StyledSpinner } from 'components/styledComponents';
 import Container from 'components/styledComponents/styledContainer';
 import { Input, FileUpload } from 'components/formItems';
 import { CountryPicker } from 'components/formItems/CountryPicker';
-import { AgePicker } from 'components/formItems/AgePicker';
+// import { AgePicker } from 'components/formItems/AgePicker';
 
 function CreateAuthor() {
 
@@ -14,7 +14,7 @@ function CreateAuthor() {
     const [authorData, setAuthorData] = useState({ name: '', age: '', country: '', })
 
     //ref
-    const authorAgeRef = useRef();
+    // const authorAgeRef = useRef();
     const authorCountryRef = useRef();
 
     //get the authors collection
@@ -55,11 +55,11 @@ function CreateAuthor() {
     }
 
     const resetSelectFields = () => {
-        authorAgeRef.current.selectOption('');
+        // authorAgeRef.current.selectOption('');
         authorCountryRef.current.selectOption('');
     }
 
-    const handleNameChange = ({ target }) => {
+    const handleDataChange = ({ target }) => {
         const { name, value } = target;
         setAuthorData({ ...authorData, [name]: value })
     }
@@ -73,8 +73,9 @@ function CreateAuthor() {
             <Container justify='center'>
                 <h2>Add Author</h2>
                 <Form onSubmit={handleSubmit} >
-                    <Input type='text' name='name' placeholder='Enter Name' onChange={handleNameChange} />
-                    <AgePicker onChange={handleSelcetChange} ref={authorAgeRef} />
+                    <Input type='text' name='name' placeholder='Enter Name' onChange={handleDataChange} />
+                    <Input type='number' name='age' placeholder='Enter Age' onChange={handleDataChange} />
+                    {/* <AgePicker onChange={handleSelcetChange} ref={authorAgeRef} /> */}
                     <CountryPicker onChange={handleSelcetChange} ref={authorCountryRef} />
                     <FileUpload name='file' onChange={handleImageChange} />
                     <Button variant="primary" type="submit" style={{ marginTop: '1rem' }} >
