@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://us-central1-books-crud-f2c20.cloudfunctions.net/"
+    baseURL: "http://localhost:5001/books-crud-f2c20/us-central1/"
   });
   
   export default api

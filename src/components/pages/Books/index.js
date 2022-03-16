@@ -74,7 +74,7 @@ const Books = () => {
     try {
       setIsLoading(true);
       console.log(pages, "pages");
-      const { data } = await api.post('getBooksByPages', { pages });
+      const { data } = await api.post('books/books-by-pages', { pages });
       console.log(data, 'api data');
       setBooksListFilterd(data);
       setIsLoading(false);
