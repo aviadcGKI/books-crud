@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-// import { useHistory } from "react-router-dom";
+import api from 'components/api';
 import { db } from 'db'
-
+import { StyledSpinner } from 'components/styledComponents';
 import Container from 'components/styledComponents/styledContainer'
 import { StyledListContainer } from 'components/styledComponents';
 
@@ -12,9 +12,8 @@ const Books = () => {
   const [booksList, setBooksList] = useState();
   const [booksListFilterd, setBooksListFilterd] = useState();
   const [authorsList, setAuthorsList] = useState();
-  // const [selectedAuthor, setSelectedAuthor] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // const history = useHistory();
 
   //get the collections ref
   const booksCollectionRef = db.collection("books");
@@ -24,12 +23,8 @@ const Books = () => {
     const getAllBooks = async () => {
       try {
         const data = await booksCollectionRef.where("isActive", "==", true).get();
-        const activeBooksList = [];
-        data.docs.forEach((doc) => {
-          activeBooksList.push({ ...doc.data(), id: doc.id })
-        });
-        setBooksList([...activeBooksList]);
-        setBooksListFilterd([...activeBooksList]);
+        setBooksList(handleBooksList(data));
+        setBooksListFilterd(handleBooksList(data));
         console.log(data);
       } catch (e) {
         console.log(e);
@@ -65,16 +60,36 @@ const Books = () => {
       return setBooksListFilterd(booksList);
     }
     try {
-      const activeBooksList = [];
+      setIsLoading(true);
       const booksData = await booksCollectionRef.where("author", "==", selectedAuthor).where("isActive", "==", true).get();
-      // console.log(booksData);
-      booksData.docs.forEach((book) => {
-        activeBooksList.push({ ...book.data(), id: book.id })
-      })
-      setBooksListFilterd(activeBooksList);
-    } catch (e) {
-      console.log(e);
+      setBooksListFilterd(handleBooksList(booksData));
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      console.log(err);
     }
+  }
+
+  const handleGetBooksByPages = async (pages) => {
+    try {
+      setIsLoading(true);
+      console.log(pages, "pages");
+      const { data } = await api.post('getBooksByPages', { pages });
+      console.log(data, 'api data');
+      setBooksListFilterd(data);
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      console.log(err)
+    }
+  }
+
+  const handleBooksList = (booksData) => {
+    const activeBooksList = [];
+    booksData.docs.forEach((book) => {
+      activeBooksList.push({ ...book.data(), id: book.id })
+    })
+    return activeBooksList;
   }
 
   const displayBooksList = () => {
@@ -96,10 +111,11 @@ const Books = () => {
   return (
     <>
       <Container>
-        <BooksNavbar authorsList={authorsList} handleSelectedAuthor={handleSelectedAuthor} />
+        <BooksNavbar authorsList={authorsList} handleSelectedAuthor={handleSelectedAuthor} handleGetBooksByPages={handleGetBooksByPages} />
         <StyledListContainer>
-          {booksListFilterd && displayBooksList()}
+          {(!isLoading && booksListFilterd) && displayBooksList()}
         </StyledListContainer>
+        {isLoading && <StyledSpinner />}
       </Container>
 
     </>

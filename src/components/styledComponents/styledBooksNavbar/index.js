@@ -8,5 +8,10 @@ export default styled.nav`
     display: flex ;
     justify-content: center ;
     align-items: center ;
-    gap: 1rem
+    gap: 1rem;
+
+    @media (max-width: 500px){
+       flex-direction: column;
+       height: 30vh;
+    }
 `
